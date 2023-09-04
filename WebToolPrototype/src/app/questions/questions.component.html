@@ -1,0 +1,591 @@
+<form [formGroup]="form">
+  <!-- Begin of the questionnaire -->
+
+  <div class="question-box">
+    <span>Does this app collect any personal information?</span>
+    <mat-radio-group [formControlName]="'persInfCol'">
+      <mat-radio-button value="yes">Yes</mat-radio-button>
+      <mat-radio-button value="no">No</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <!-- Personal information block -->
+  <div *ngIf="form.get('persInfCol')?.value === 'yes'">
+    
+    <!-- Third-Party data collection -->
+    <div class="question-box">
+      <span>Does it collect the data directly from the person or also from third parties?</span>
+      <mat-radio-group [formControlName]="'dirOrThird'">
+        <mat-radio-button value="directly">Directly</mat-radio-button>
+        <mat-radio-button value="thirdparties">Third-Parties</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div *ngIf="form.get('dirOrThird')?.value === 'thirdparties'">
+      <div class="question-box">
+        <span>From which third-parties does it collect the information?</span>
+        <mat-radio-group>
+          <mat-form-field class="fulltextinputs">
+            <mat-label>Third-Parties from which data is collected</mat-label>
+            <textarea matInput id="thiParDataColTextarea" placeholder="Service Providers, Government Agencies, ..."></textarea>
+          </mat-form-field>
+        </mat-radio-group>
+      </div>
+    </div>
+    <!-- Third-Party data collection end -->
+
+    <div class="question-box">
+      <span>When does it collect personal data?</span>
+      <mat-radio-group>
+        <mat-checkbox [formControlName]="'dataCol_whileUsing'">While using the app</mat-checkbox>
+        <mat-checkbox [formControlName]="'dataCol_whileBackground'">When the app is running in the background</mat-checkbox>
+        <mat-checkbox [formControlName]="'dataCol_whileInstalled'">When the app is installed</mat-checkbox>
+        <mat-checkbox [formControlName]="'dataCol_other'">Other</mat-checkbox>
+      </mat-radio-group>
+      <div *ngIf="form.get('dataCol_other')?.value">
+        <mat-form-field class="fulltextinputs">
+          <mat-label>Other situations in which data is collected</mat-label>
+          <textarea matInput id="dataCol_other_Textarea"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    
+    <!-- Personal and contact details collection -->
+    <div class="question-box">
+      <span>Does this app collect personal and contact details?</span>
+      <mat-radio-group [formControlName]="'contactCol'">
+        <mat-radio-button value="yes">Yes</mat-radio-button>
+        <mat-radio-button value="no">No</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div *ngIf="form.get('contactCol')?.value === 'yes'">
+      <div class="question-box">
+        <span>What kind of personal and contact details does it collect?</span>
+        <mat-radio-group>
+          <mat-checkbox [formControlName]="'contactCol_name'">Name</mat-checkbox>
+          <mat-checkbox [formControlName]="'contactCol_address'">Address</mat-checkbox>
+          <mat-checkbox [formControlName]="'contactCol_email'">Email</mat-checkbox>
+          <mat-checkbox [formControlName]="'contactCol_number'">Phone number</mat-checkbox>
+          <mat-checkbox [formControlName]="'contactCol_birthdate'">Date of birth</mat-checkbox>
+          <mat-checkbox [formControlName]="'contactCol_other'">Other</mat-checkbox>
+        </mat-radio-group>
+        <div *ngIf="form.get('contactCol_other')?.value">
+          <mat-form-field class="fulltextinputs">
+            <mat-label>Other kinds of personal and contact details that are collected</mat-label>
+            <textarea matInput id="contactCol_other_Textarea"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <!-- Personal and contact details collection end -->
+
+    <!-- Government related identifier details -->
+    <div class="question-box">
+      <span>Does this app collect details about government related identifiers?</span>
+      <mat-radio-group [formControlName]="'govRelIdsCol'">
+        <mat-radio-button value="yes">Yes</mat-radio-button>
+        <mat-radio-button value="no">No</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div *ngIf="form.get('govRelIdsCol')?.value === 'yes'">
+      <div class="question-box">
+        <span>What kind of details about government related identifiers does it collect?</span>
+        <mat-radio-group>
+          <mat-checkbox [formControlName]="'govRelIdsCol_taxfilenumber'">Tax File Number</mat-checkbox>
+          <mat-checkbox [formControlName]="'govRelIdsCol_taxresidence'">Country of tax residency</mat-checkbox>
+          <mat-checkbox [formControlName]="'govRelIdsCol_passport'">Passport</mat-checkbox>
+          <mat-checkbox [formControlName]="'govRelIdsCol_driverlicence'">Drivers licence</mat-checkbox>
+          <mat-checkbox [formControlName]="'govRelIdsCol_idcard'">Identity card</mat-checkbox>
+          <mat-checkbox [formControlName]="'govRelIdsCol_birthcertificate'">Birth certificate</mat-checkbox>
+          <mat-checkbox [formControlName]="'govRelIdsCol_other'">Other</mat-checkbox>
+        </mat-radio-group>
+        <div *ngIf="form.get('govRelIdsCol_other')?.value">
+          <mat-form-field class="fulltextinputs">
+            <mat-label>Other kinds of details about government related identifiers that are collected</mat-label>
+            <textarea matInput id="govRelIdsCol_other_Textarea"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <!-- Government related identifier details end -->
+
+    <!-- Personal circumstances details -->
+    <div class="question-box">
+      <span>Does this app collect information about personal circumstances?</span>
+      <mat-radio-group [formControlName]="'persCircCol'">
+        <mat-radio-button value="yes">Yes</mat-radio-button>
+        <mat-radio-button value="no">No</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div *ngIf="form.get('persCircCol')?.value === 'yes'">
+      <div class="question-box">
+        <span>What kind of information about personal circumstances does it collect?</span>
+        <mat-radio-group>
+          <mat-checkbox [formControlName]="'persCircCol_lifeevents'" [matTooltip]="'e.g. death in the family'">Significant life events</mat-checkbox>
+          <mat-checkbox [formControlName]="'persCircCol_disasters'" [matTooltip]="'e.g. house destroyed by an earthquake'">Emergency event or natural disaster</mat-checkbox>
+          <mat-checkbox [formControlName]="'persCircCol_financialchange'" [matTooltip]="'e.g. job loss or bankruptcy'">Changes in the financial situation</mat-checkbox>
+          <mat-checkbox [formControlName]="'persCircCol_injuriesandaddictions'">Details of injury, illness, gambling or addiction</mat-checkbox>
+          <mat-checkbox [formControlName]="'persCircCol_other'">Other</mat-checkbox>
+        </mat-radio-group>
+        <div *ngIf="form.get('persCircCol_other')?.value">
+          <mat-form-field class="fulltextinputs">
+            <mat-label>Other kinds of information about personal circumstances that are collected</mat-label>
+            <textarea matInput id="persCircCol_other_Textarea"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <!-- Personal circumstances details end -->
+
+    <div class="question-box">
+      <span>Does this app collect financial information?</span>
+      <mat-radio-group [formControlName]="'finInfCol'">
+        <mat-radio-button value="yes">Yes</mat-radio-button>
+        <mat-radio-button value="no">No</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!-- Financial information block -->
+    <div *ngIf="form.get('finInfCol')?.value === 'yes'">
+      
+      <div class="question-box">
+        <span>What kind of financial information does it collect?</span>
+        <mat-radio-group>
+          <mat-checkbox [formControlName]="'finInfCol_employment'">Employment details</mat-checkbox>
+          <mat-checkbox [formControlName]="'finInfCol_income'">Income</mat-checkbox>
+          <mat-checkbox [formControlName]="'finInfCol_credithistory'">Credit history</mat-checkbox>
+          <mat-checkbox [formControlName]="'finInfCol_isuranceclaims'">Insurance claim history</mat-checkbox>
+          <mat-checkbox [formControlName]="'finInfCol_other'">Other</mat-checkbox>
+        </mat-radio-group>
+        <div *ngIf="form.get('finInfCol_other')?.value">
+          <mat-form-field class="fulltextinputs">
+            <mat-label>Other kinds of financial information that are collected</mat-label>
+            <textarea matInput id="finInfCol_other_Textarea"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Credit information -->
+      <div class="question-box">
+        <span>Does this app collect credit information?</span>
+        <mat-radio-group [formControlName]="'credInfCol'">
+          <mat-radio-button value="yes">Yes</mat-radio-button>
+          <mat-radio-button value="no">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div *ngIf="form.get('credInfCol')?.value === 'yes'">
+        <div class="question-box">
+          <span>What kind of credit information does it collect?</span>
+          <mat-radio-group>
+            <mat-checkbox [formControlName]="'credInfCol_identification'" [matTooltip]="'e.g. name, gender, employers'">Identification information</mat-checkbox>
+            <mat-checkbox [formControlName]="'credInfCol_repayment'">Repayment history</mat-checkbox>
+            <mat-checkbox [formControlName]="'credInfCol_public'" [matTooltip]="'e.g. debt agreements, personal insolvency'">Public information</mat-checkbox>
+            <mat-checkbox [formControlName]="'credInfCol_other'">Other</mat-checkbox>
+          </mat-radio-group>
+          <div *ngIf="form.get('credInfCol_other')?.value">
+            <mat-form-field class="fulltextinputs">
+              <mat-label>Other kinds of credit information that are collected</mat-label>
+              <textarea matInput id="credInfCol_other_Textarea"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <!-- Credit information end -->
+
+      <!-- Transaction information -->
+      <div class="question-box">
+        <span>Does this app collect transaction information?</span>
+        <mat-radio-group [formControlName]="'transInfCol'">
+          <mat-radio-button value="yes">Yes</mat-radio-button>
+          <mat-radio-button value="no">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div *ngIf="form.get('transInfCol')?.value === 'yes'">
+        <div class="question-box">
+          <span>What kind of transaction information does it collect?</span>
+          <mat-radio-group>
+            <mat-checkbox [formControlName]="'transInfCol_transfers'">Transfers</mat-checkbox>
+            <mat-checkbox [formControlName]="'transInfCol_withdrawals'">Money withdrawals</mat-checkbox>
+            <mat-checkbox [formControlName]="'transInfCol_other'">Other</mat-checkbox>
+          </mat-radio-group>
+          <div *ngIf="form.get('transInfCol_other')?.value">
+            <mat-form-field class="fulltextinputs">
+              <mat-label>Other kinds of transaction information that are collected</mat-label>
+              <textarea matInput id="transInfCol_other_Textarea"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <!-- Transaction information end -->
+
+    </div>
+    <!-- Financial information block end -->
+
+  </div>
+  <!-- Personal information block end-->
+
+  <div *ngIf="form.get('persInfCol')?.value">
+    <!-- Digital information -->
+    <div class="question-box">
+      <span>Does this app collect digital information?</span>
+      <mat-radio-group [formControlName]="'digInfCol'">
+        <mat-radio-button value="yes">Yes</mat-radio-button>
+        <mat-radio-button value="no">No</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div *ngIf="form.get('digInfCol')?.value === 'yes'">
+
+      <div class="question-box">
+        <span>What kind of digital information does it collect?</span>
+        <mat-radio-group>
+          <mat-checkbox [formControlName]="'digInfCol_location'">Location</mat-checkbox>
+          <mat-checkbox [formControlName]="'digInfCol_ipaddress'">IP-Address</mat-checkbox>
+          <mat-checkbox [formControlName]="'digInfCol_deviceused'">Device used to access the app</mat-checkbox>
+          <mat-checkbox [formControlName]="'digInfCol_network'">Network details</mat-checkbox>
+          <mat-checkbox [formControlName]="'digInfCol_other'">Other</mat-checkbox>
+        </mat-radio-group>
+        <div *ngIf="form.get('digInfCol_other')?.value">
+          <mat-form-field class="fulltextinputs">
+            <mat-label>Other kinds of digital information that are collected</mat-label>
+            <textarea matInput id="digInfCol_other_Textarea"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <span>For what reason does it collect the digital information?</span>
+        <mat-radio-group>
+          <mat-checkbox [formControlName]="'digInfCol_reason_fraudprev'">Fraud prevention</mat-checkbox>
+          <mat-checkbox [formControlName]="'digInfCol_reason_business'">Business intelligence</mat-checkbox>
+          <mat-checkbox [formControlName]="'digInfCol_reason_personalization'">Personalization</mat-checkbox>
+          <mat-checkbox [formControlName]="'digInfCol_reason_other'">Other</mat-checkbox>
+        </mat-radio-group>
+        <div *ngIf="form.get('digInfCol_reason_other')?.value">
+          <mat-form-field class="fulltextinputs">
+            <mat-label>Other reasons why digital information is collected</mat-label>
+            <textarea matInput id="digInfCol_reason_other_Textarea"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <span>Does the digital information collected become linked to the user?</span>
+        <mat-radio-group [formControlName]="'digInfColLink'">
+          <mat-radio-button value="yes">Yes</mat-radio-button>
+          <mat-radio-button value="no">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+    </div>
+    <!-- Digital information end -->
+
+    <div *ngIf="form.get('digInfCol')?.value">
+      <!-- Behavioral information -->
+      <div class="question-box">
+        <span>Does this app collect behavioral information?</span>
+        <mat-radio-group [formControlName]="'behavInfCol'">
+          <mat-radio-button value="yes">Yes</mat-radio-button>
+          <mat-radio-button value="no">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div *ngIf="form.get('behavInfCol')?.value === 'yes'">
+
+        <div class="question-box">
+          <span>What kind of behavioral information does it collect?</span>
+          <mat-radio-group>
+            <mat-checkbox [formControlName]="'behavInfCol_patterns'">Spending patterns</mat-checkbox>
+            <mat-checkbox [formControlName]="'behavInfCol_usagetimes'">Usage times</mat-checkbox>
+            <mat-checkbox [formControlName]="'behavInfCol_other'">Other</mat-checkbox>
+          </mat-radio-group>
+          <div *ngIf="form.get('behavInfCol_other')?.value">
+            <mat-form-field class="fulltextinputs">
+              <mat-label>Other kinds of behavioral information that are collected</mat-label>
+              <textarea matInput id="behavInfCol_other_Textarea"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="question-box">
+          <span>For what reason does it collect the behavioral information?</span>
+          <mat-radio-group>
+            <mat-checkbox [formControlName]="'behavInfCol_reason_personalization'">Personalization</mat-checkbox>
+            <mat-checkbox [formControlName]="'behavInfCol_reason_advertising'">Targeted advertising</mat-checkbox>
+            <mat-checkbox [formControlName]="'behavInfCol_reason_service'">Service improvement</mat-checkbox>
+            <mat-checkbox [formControlName]="'behavInfCol_reason_business'">Business intelligence</mat-checkbox>
+            <mat-checkbox [formControlName]="'behavInfCol_reason_fraudprev'">Fraud prevention</mat-checkbox>
+            <mat-checkbox [formControlName]="'behavInfCol_reason_other'">Other</mat-checkbox>
+          </mat-radio-group>
+          <div *ngIf="form.get('behavInfCol_reason_other')?.value">
+            <mat-form-field class="fulltextinputs">
+              <mat-label>Other reasons why behavioral information is collected</mat-label>
+              <textarea matInput id="behavInfCol_reason_other_Textarea"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="question-box">
+          <span>Does the behavioral information collected become linked to the user?</span>
+          <mat-radio-group [formControlName]="'behavInfColLink'">
+            <mat-radio-button value="yes">Yes</mat-radio-button>
+            <mat-radio-button value="no">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+      </div>
+      <!-- Behavioral information end -->
+
+      <div *ngIf="form.get('behavInfCol')?.value">
+        <!-- Sensitive information -->
+        <div class="question-box">
+          <span>Does this app collect sensitive information?</span>
+          <mat-radio-group [formControlName]="'sensInfCol'">
+            <mat-radio-button value="yes">Yes</mat-radio-button>
+            <mat-radio-button value="no">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div *ngIf="form.get('sensInfCol')?.value === 'yes'">
+          <div class="question-box">
+            <span>What kind of sensitive information does it collect?</span>
+            <mat-radio-group>
+              <mat-checkbox [formControlName]="'sensInfCol_health'" [matTooltip]="'e.g. if a user is in financial difficulty and asks for hardship relief due to illness'">Health information</mat-checkbox>
+              <mat-checkbox [formControlName]="'sensInfCol_biometric'" [matTooltip]="'e.g. face, fingerprint'">Biometrical information</mat-checkbox>
+              <mat-checkbox [formControlName]="'sensInfCol_race'">Race or ethnicity</mat-checkbox>
+              <mat-checkbox [formControlName]="'sensInfCol_other'">Other</mat-checkbox>
+            </mat-radio-group>
+            <div *ngIf="form.get('sensInfCol_other')?.value">
+              <mat-form-field class="fulltextinputs">
+                <mat-label>Other kinds of sensitive information that are collected</mat-label>
+                <textarea matInput id="sensInfCol_other_Textarea"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <!-- Sensitive information end -->
+
+        <div *ngIf="form.get('sensInfCol')?.value">
+          <!-- Marketing information -->
+          <div class="question-box">
+            <span>Do you use any information for marketing purposes?</span>
+            <mat-radio-group [formControlName]="'markInfUsag'">
+              <mat-radio-button value="yes">Yes</mat-radio-button>
+              <mat-radio-button value="no">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div *ngIf="form.get('markInfUsag')?.value === 'yes'">
+            <div class="question-box">
+              <span>Which information do you use for marketing purposes?</span>
+              <mat-radio-group>
+                <mat-checkbox [formControlName]="'markInfUsag_behavior'">Behavioral information</mat-checkbox>
+                <mat-checkbox [formControlName]="'markInfUsag_digital'">Digital information</mat-checkbox>
+                <mat-checkbox [formControlName]="'markInfUsag_personal'">Personal details</mat-checkbox>
+                <mat-checkbox [formControlName]="'markInfUsag_other'">Other</mat-checkbox>
+              </mat-radio-group>
+              <div *ngIf="form.get('markInfUsag_other')?.value">
+                <mat-form-field class="fulltextinputs">
+                  <mat-label>Other types of information that are used for marketing</mat-label>
+                  <textarea matInput id="markInfUsag_other_Textarea"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <!-- Marketing information end -->
+
+          <div *ngIf="form.get('markInfUsag')?.value">
+            <div class="question-box">
+              <span>Do you share any of the collected information?</span>
+              <mat-radio-group [formControlName]="'infColSharing'">
+                <mat-radio-button value="yes">Yes</mat-radio-button>
+                <mat-radio-button value="no">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <!-- Information sharing block -->
+            <div *ngIf="form.get('infColSharing')?.value === 'yes'">
+
+              <div class="question-box">
+                <span>With whom do you share it?</span>
+                <mat-radio-group>
+                  <mat-checkbox [formControlName]="'infColSharing_auththirdparties'" [matTooltip]="'Third parties the user allowed'">Authorized third parties</mat-checkbox>
+                  <mat-checkbox [formControlName]="'infColSharing_verifthirdparties'">Third parties that can verify the collected information</mat-checkbox>
+                  <mat-checkbox [formControlName]="'infColSharing_servicepartners'">Service partners</mat-checkbox>
+                  <mat-checkbox [formControlName]="'infColSharing_government'">Government agencies</mat-checkbox>
+                  <mat-checkbox [formControlName]="'infColSharing_banks'">Credit agencies or banks</mat-checkbox>
+                  <mat-checkbox [formControlName]="'infColSharing_other'">Other</mat-checkbox>
+                </mat-radio-group>
+                <div *ngIf="form.get('infColSharing_other')?.value">
+                  <mat-form-field class="fulltextinputs">
+                    <mat-label>Other parties with which information is shared</mat-label>
+                    <textarea matInput id="infColSharing_other_Textarea"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="question-box">
+                <span>Do you also share the data overseas?</span>
+                <mat-radio-group [formControlName]="'infColSharingOverseas'">
+                  <mat-radio-button value="yes">Yes</mat-radio-button>
+                  <mat-radio-button value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div *ngIf="form.get('infColSharingOverseas')?.value === 'yes'">
+                <div class="question-box">
+                  <span>Why or with whom do you share it overseas?</span>
+                  <mat-radio-group>
+                    <mat-checkbox [formControlName]="'infColSharingOverseas_companymembers'">Foreign company members</mat-checkbox>
+                    <mat-checkbox [formControlName]="'infColSharingOverseas_serviceproviders'">Foreign service providers</mat-checkbox>
+                    <mat-checkbox [formControlName]="'infColSharingOverseas_transactions'">Completing international transactions</mat-checkbox>
+                    <mat-checkbox [formControlName]="'infColSharingOverseas_law'">Complying with the law</mat-checkbox>
+                    <mat-checkbox [formControlName]="'infColSharingOverseas_other'">Other</mat-checkbox>
+                  </mat-radio-group>
+                  <div *ngIf="form.get('infColSharingOverseas_other')?.value">
+                    <mat-form-field class="fulltextinputs">
+                      <mat-label>Other reasons or other parties overseas with whom information is shared</mat-label>
+                      <textarea matInput id="infColSharingOverseas_other_Textarea"></textarea>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+
+              <div class="question-box">
+                <span>Are all parties with whom data is shared part of the financial sector or indispensable for the performance of financial services?</span>
+                <mat-radio-group [formControlName]="'shareFinanPart'">
+                  <mat-radio-button value="yes">Yes</mat-radio-button>
+                  <mat-radio-button value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </div>
+
+            </div>
+            <!-- Information sharing block end -->
+
+            <div *ngIf="form.get('infColSharing')?.value">
+              <!-- Encryption information -->
+              <div class="question-box">
+                <span>Is all app data stored and sent encrypted?</span>
+                <mat-radio-group [formControlName]="'encryption'">
+                  <mat-radio-button value="yes">Yes</mat-radio-button>
+                  <mat-radio-button value="no">No</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div *ngIf="form.get('encryption')?.value === 'no'">
+                <div class="question-box">
+                  <span>What is not encrypted?</span>
+                  <mat-radio-group [formControlName]="'encryptionSpecific'">
+                    <mat-radio-button value="stored">Stored data</mat-radio-button>
+                    <mat-radio-button value="sent">Sent data</mat-radio-button>
+                    <mat-radio-button value="both">Both</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <!-- Encryption information end -->
+              
+              <div *ngIf="form.get('encryption')?.value">
+                <div class="question-box">
+                  <span>Can a user access his information? </span>
+                  <mat-radio-group [formControlName]="'userAccess'">
+                    <mat-radio-button value="yes">Yes</mat-radio-button>
+                    <mat-radio-button value="no">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+                <div *ngIf="form.get('userAccess')?.value">
+                  <div class="question-box">
+                    <span>Can a user correct or update his information?</span>
+                    <mat-radio-group [formControlName]="'userCorrect'">
+                      <mat-radio-button value="yes">Yes</mat-radio-button>
+                      <mat-radio-button value="no">No</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+
+                  <div *ngIf="form.get('userCorrect')?.value">
+                    <!-- Data deletion -->
+                    <div class="question-box">
+                      <span>Can a user request to delete all the information collected about him?</span>
+                      <mat-radio-group [formControlName]="'userDeletion'">
+                        <mat-radio-button value="yes">Yes</mat-radio-button>
+                        <mat-radio-button value="no">No</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                    <div *ngIf="form.get('userDeletion')?.value === 'yes'">
+                      <div class="question-box">
+                        <span>Will this deletion request also delete all shared information with third parties?</span>
+                        <mat-radio-group [formControlName]="'userDeletionThirdParties'">
+                          <mat-radio-button value="yes">Yes</mat-radio-button>
+                          <mat-radio-button value="no">No</mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                    </div>
+                    <!-- Data deletion end -->
+
+                    <div *ngIf="form.get('userDeletion')?.value">
+                      <!-- Data deletion when account closed -->
+                      <div class="question-box">
+                        <span>Will data be retained if the user account is closed?</span>
+                        <mat-radio-group [formControlName]="'accCloseData'">
+                          <mat-radio-button value="yes">Yes</mat-radio-button>
+                          <mat-radio-button value="no">No</mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                      <div *ngIf="form.get('accCloseData')?.value === 'yes'">
+                        <div class="question-box">
+                          <span>Which data will be retained if the user account is closed?</span>
+                          <mat-radio-group>
+                            <mat-checkbox [formControlName]="'accCloseData_alldata'">All data</mat-checkbox>
+                            <mat-checkbox [formControlName]="'accCloseData_anonym'" [matTooltip]="'Data which cannot be traced back to a specific person'">Anonymized data</mat-checkbox>
+                            <mat-checkbox [formControlName]="'accCloseData_userspecific'">User specific data</mat-checkbox>
+                            <mat-checkbox [formControlName]="'accCloseData_other'">Other</mat-checkbox>
+                          </mat-radio-group>
+                          <div *ngIf="form.get('accCloseData_other')?.value">
+                            <mat-form-field class="fulltextinputs">
+                              <mat-label>Other types of data that will be retained if the user account is closed</mat-label>
+                              <textarea matInput id="accCloseData_other_Textarea"></textarea>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Data deletion when account closed end -->
+
+                      <div *ngIf="form.get('accCloseData')?.value">
+                        <!-- Data storage -->
+                        <div class="question-box">
+                          <span>How long is the collected data stored?</span>
+                          <mat-radio-group [formControlName]="'dataStorage'">
+                            <mat-radio-button value="less">Less than a year</mat-radio-button>
+                            <mat-radio-button value="onetothree">1-3 years</mat-radio-button>
+                            <mat-radio-button value="threetoten">3-10 years</mat-radio-button>
+                            <mat-radio-button value="overten">Over 10 years</mat-radio-button>
+                          </mat-radio-group>
+                        </div>
+                        <div *ngIf="form.get('dataStorage')?.value">
+                          <div class="question-box">
+                            <span>Which data is stored?</span>
+                            <mat-radio-group>
+                              <mat-checkbox [formControlName]="'dataStorage_account'">Registration and account data</mat-checkbox>
+                              <mat-checkbox [formControlName]="'dataStorage_usage'">Usage data</mat-checkbox>
+                              <mat-checkbox [formControlName]="'dataStorage_location'">Location data</mat-checkbox>
+                              <mat-checkbox [formControlName]="'dataStorage_device'">Device information</mat-checkbox>
+                              <mat-checkbox [formControlName]="'dataStorage_transaction'">Payment and transaction data</mat-checkbox>
+                              <mat-checkbox [formControlName]="'dataStorage_other'">Other</mat-checkbox>
+                            </mat-radio-group>
+                            <div *ngIf="form.get('dataStorage_other')?.value">
+                              <mat-form-field class="fulltextinputs">
+                                <mat-label>Other types of data that are stored</mat-label>
+                                <textarea matInput id="dataStorage_other_Textarea"></textarea>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Data storage end -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of the questionnaire -->
+  <button mat-raised-button (click)="exportData()" [ngClass]="{'disabled-button': !everythingClicked(), 'enabled-button': everythingClicked()}"
+  [matTooltip]="getTooltipMessage()">Submit</button>
+</form>
