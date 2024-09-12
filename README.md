@@ -1,4 +1,4 @@
-# Masterthesis_Code-and-Results
+# An_Analysis_of_Privacy_Regulations_and_User_Concerns_of_Finance_Mobile_Applications
 
 This repository is subject to the following structure:
 
